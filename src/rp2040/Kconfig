@@ -75,8 +75,12 @@ choice
     prompt "Flash chip" if LOW_LEVEL_OPTIONS && RP2040_HAVE_STAGE2
     config RP2040_FLASH_W25Q080
         bool "WINBOND W25Q080 1MB"
+    config RP2040_FLASH_W25Q16
+        bool "WINBOND W25Q16JV 2MB"
+    config RP2040_FLASH_W25Q16
+        bool "WINBOND W25Q64JV 8MB"
     config RP2040_FLASH_W25Q128
-        bool "WINBOND W25Q128 16MB"
+        bool "WINBOND W25Q128JV 16MB"
     config RP2040_FLASH_GENERIC_03
         bool "GENERIC_03H with CLKDIV 4"
 endchoice
@@ -85,6 +89,8 @@ config RP2040_STAGE2_FILE
     string
     default "boot2_generic_03h.S" if RP2040_FLASH_GENERIC_03
     default "boot2_w25q080_2_padded_checksum.S" if RP2040_FLASH_W25Q080
+    default "boot2_w25q16jvxq_4_padded_checksum.S" if RP2040_FLASH_W25Q16
+    default "boot2_w25q64jv_4_padded_checksum.S" if RP2040_FLASH_W25Q16
     default "boot2_w25q128jvxq_4_padded_checksum.S" if RP2040_FLASH_W25Q128
 
 config RP2040_STAGE2_CLKDIV
